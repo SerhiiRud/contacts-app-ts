@@ -10,8 +10,10 @@ export const Filter = ({
   const initialValues: FormValues = { name: "" };
   return (
     <Formik initialValues={initialValues} onSubmit={() => {}}>
-      <FormField htmlFor="filter">Find contacts by name</FormField>
-      <Field type="text" name="filter" onChange={onSearch}></Field>
+      <>
+        <FormField htmlFor="filter">Find contacts by name</FormField>
+        <Field type="text" name="filter" onChange={onSearch}></Field>
+      </>
     </Formik>
   );
 };

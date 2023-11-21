@@ -1,14 +1,15 @@
-import PropTypes from 'prop-types';
-import { Formik } from 'formik';
-import { object, string } from 'yup';
-import { nanoid } from 'nanoid';
+import PropTypes from "prop-types";
+import { Formik } from "formik";
+import { object, string } from "yup";
+import { nanoid } from "nanoid";
 import {
   FormField,
   Form,
   Field,
   ErrorMessage,
   FormButton,
-} from './Phonebook.styled';
+} from "./Phonebook.styled";
+import IPhonebook from "../../interfaces/Phonebook.interface";
 
 const userSchema = object().shape({
   name: string()
@@ -17,25 +18,25 @@ const userSchema = object().shape({
     .trim()
     .matches(
       /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
-      'Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d`Artagnan'
+      "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d`Artagnan"
     )
-    .required('This field is required!'),
+    .required("This field is required!"),
   number: string()
     .min(5)
     .max(15)
     .trim()
     .matches(
       /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
-      'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
+      "Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
     )
-    .required('This field is required!'),
+    .required("This field is required!"),
 });
 
-export const ContactForm = ({ onAddContact }) => {
+export const ContactForm = ({ onAddContact }: IPhonebook) => {
   return (
     <>
       <Formik
-        initialValues={{ name: '', number: '' }}
+        initialValues={{ name: "", number: "" }}
         onSubmit={(values, actions) => {
           onAddContact({ ...values, id: nanoid() });
           actions.resetForm();
